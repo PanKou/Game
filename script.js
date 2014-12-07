@@ -8,14 +8,13 @@ player_xvel = 0;
 player_yvel = 0;
 player_x = 350;
 player_y = 500;
-player_w = 37;
-player_h = 92;
+player_w = 50;
+player_h = 100;
 var moveright = false;
 var moveleft = false;
 var movedown = false;
 var moveup = false;
-var ground = true;
-var screen = 0;
+var screenx = 0;
 var coincon = false;
  
 function scaninput(e) {
@@ -26,22 +25,22 @@ function scaninput(e) {
     }
     switch (keypress) {
     case 38: //Up key
-        console.log("you pressed up");
+//        console.log("you pressed up");
         moveup = true;
         player_image.src = "spriteb.png";
         break;
     case 39: //Right key
-        console.log("you pressed right");
+//        console.log("you pressed right");
         moveright = true;
         player_image.src = "spriter.png";
         break;
     case 37: //Left Key
-        console.log("you pressed left");
+//        console.log("you pressed left");
         moveleft = true;
         player_image.src = "spritel.png";
         break;
     case 40: //Down Key
-        console.log("you pressed down");
+//        console.log("you pressed down");
         movedown = true;
         player_image.src = "spritef.png";
         break;
@@ -93,49 +92,31 @@ var update = function () {
     }
     player_x = player_xvel * dt + player_x;
     player_y = player_yvel * dt + player_y;
-    if (player_y > 540) {
-        player_y = 540;
-        player_yvel = 0;
-        ground = true;
-    }
-    if (moveup) {
-        ground = false;
-    }
-    if (player_y === 540) {
-        ground = true;
-    }
     if (player_x > 800){
         player_x = 0;
-        screen++;
+        screenx++;
     }
     if (player_x < 0){
         player_x = 800;
-        screen--;
-    }
-    if (player_y != 540){
-      ground = false;
+        screenx--;
     }
 };
 
-function collobs(x, y, w, h){
+function collrect(x, y, w, h){
     
     if(player_x > x - player_w && player_x < (x+w)){
         if (player_y > y) {
         player_y = y;
         player_yvel = 0;
-        ground = true;
     }
       }
       if(player_y < y - h){
-        ground = false;
       }
       if(player_y === y - h){
-        ground = true;
       }
      else{
       if(player_y < 540){
         if(player_y + h === y){
-        ground = false;
         }
     }
   }
@@ -148,39 +129,29 @@ function coin(x, y, w, h){
     moveleft = false;
     moveup = false;
     alert("Thanks for testing out my broken physics engine!");
-    
   }
 }
 function draw() {
     var c = document.getElementById("canvas");
     var context = c.getContext("2d");
     context.clearRect(0, 0, 800, 600);
-    context.fillStyle = "#4444ff";
-    context.fillRect(0, 0, 800, 600);
- 
- 
-    //draw floor
-    context.fillStyle = "#000000";
-    context.fillRect(0, 540, 800, 40);
- 
-    //Draw player
-    context.save();
-    context.translate(player_x, player_y);
-    context.drawImage(player_image, 0, -(player_h));
-    context.restore();
+    context.fillStyle = "#ffffff";
+    context.fillRect(0, 0, 800, 600); //Draws white background
+
     
-    if (screen < -1){
-    screen = -1;
+    if (screenx < -1){
+    screenx = -1;
     }
-    if (screen > 4){
-    screen = 4;
+    if (screenx > 4){
+    screenx = 4;
     }
-    
-    switch (screen) {
+   
+   //draw background 
+    switch (screenx) {
       case -1:
-        context.font = "24px Arial";
-        context.fillStyle = "rgba(255, 255, 255, 0.8)";
-        context.fillText("Wrong Way! Go right!", 300, 300);
+        context.fillStyle = "#ff0000";
+        context.fillRect(0, 0, 800, 600);
+
         break;    
       case 0:
         context.font = "24px Arial";
@@ -226,7 +197,12 @@ function draw() {
         
         break;
     }
-
+     
+    //Draw player
+    context.save();
+    context.translate(player_x, player_y);
+    context.drawImage(player_image, 0, -(player_h));
+    context.restore();
 }
  
 function run() {
