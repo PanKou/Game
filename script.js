@@ -12,8 +12,8 @@ player_w = 37;
 player_h = 92;
 var moveright = false;
 var moveleft = false;
-//var movedown = false;
-var jump = false;
+var movedown = false;
+var moveup = false;
 var ground = true;
 var screen = 0;
 var coincon = false;
@@ -26,22 +26,22 @@ function scaninput(e) {
     }
     switch (keypress) {
     case 38: //Up key
-//        console.log("you pressed up");
-        jump = true;
+        console.log("you pressed up");
+        moveup = true;
         player_image.src = "spriteb.png";
         break;
     case 39: //Right key
-//        console.log("you pressed right");
+        console.log("you pressed right");
         moveright = true;
         player_image.src = "spriter.png";
         break;
     case 37: //Left Key
-//        console.log("you pressed left");
+        console.log("you pressed left");
         moveleft = true;
         player_image.src = "spritel.png";
         break;
     case 40: //Down Key
-//        console.log("you pressed down");
+        console.log("you pressed down");
         movedown = true;
         player_image.src = "spritef.png";
         break;
@@ -56,7 +56,7 @@ function stopmove(e) {
     }
     switch (keyup) {
     case 38: // Up
-        jump = false;
+        moveup = false;
         break;
     case 39: // Right
         moveright = false;
@@ -64,25 +64,32 @@ function stopmove(e) {
     case 37: // Left
         moveleft = false;
         break;
+    case 40: //Down
+        movedown = false;
+        player_image.src = "spritef.png";
+        break;
     }
 }
  
 var update = function () {
  
     if (moveright) {
-        player_xvel = 200
+        player_xvel = 100
     }
     if (moveleft) {
-        player_xvel = -200
+        player_xvel = -100
     }
     if (!moveleft && !moveright) {
         player_xvel = 0
     }
-    if (jump && ground) {
-        player_yvel = -170
+    if (moveup) {
+        player_yvel = -100
     }
-    if (!ground) {
-        player_yvel = player_yvel + (196 * dt);
+    if (movedown) {
+        player_yvel = 100
+    }
+    if (!moveup && !movedown) {
+        player_yvel = 0
     }
     player_x = player_xvel * dt + player_x;
     player_y = player_yvel * dt + player_y;
@@ -91,7 +98,7 @@ var update = function () {
         player_yvel = 0;
         ground = true;
     }
-    if (jump) {
+    if (moveup) {
         ground = false;
     }
     if (player_y === 540) {
@@ -139,7 +146,7 @@ function coin(x, y, w, h){
     coincon = true;
     moveright = false;
     moveleft = false;
-    jump = false;
+    moveup = false;
     alert("Thanks for testing out my broken physics engine!");
     
   }
