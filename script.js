@@ -162,50 +162,22 @@ function draw() {
       case -1:
         context.fillStyle = "#ff0000";
         context.fillRect(0, 0, 800, 600);
-
         break;    
       case 0:
-        context.font = "24px Arial";
-        context.fillStyle = "rgba(255, 255, 255, 0.8)";
-        context.fillText("Use the arrow keys to go right!", 300, 300);
+
         break;
       case 1:
-        context.fillStyle = "#000000";
-        context.fillRect(200, 500, 400, 40);
-        collobs(200, 500, 400, 40);
-        context.fillRect(250, 450, 100, 50);
-        collobs(250, 450, 100, 50);
+
         break;
       case 2:
-        context.fillStyle = "#000000";
-        context.fillRect(200, 500, 400, 40);
-        collobs(200, 500, 400, 40);
-        context.fillRect(250, 450, 350, 50);
-        collobs(250, 450, 350, 50);
-        context.fillRect(300, 400, 300, 50);
-        collobs(300, 400, 300, 50);
-        context.fillRect(350, 350, 250, 50);
-        collobs(350, 350, 250, 50);
+
         break;
-       case 3:
-        context.fillStyle = "#000000";
-        context.fillRect(500, 300, 100, 700);
-        collobs(500, 300, 100, 700);
-        if(!coincon){
-          context.font = "24px Arial";
-          context.fillStyle = "rgba(255, 255, 255, 0.8)";
-          context.fillText("Climb the tower to grab the coin!", 300, 300);
-          context.fillStyle = "#ffff00";
-          context.fillRect(525, 200, 50, 50);
-          coin(525, 200, 50, 50);
-          }
-          break;
+      case 3:
+
+        break;
           
-        case 4:
-         context.font = "24px Arial";
-         context.fillStyle = "rgba(255, 255, 255, 0.8)";
-         context.fillText("There is nothing else here for now.", 300, 300);
-        
+      case 4:
+
         break;
     }
      
