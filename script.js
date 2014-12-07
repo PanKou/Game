@@ -15,6 +15,7 @@ var moveleft = false;
 var movedown = false;
 var moveup = false;
 var screenx = 0;
+var screeny = 0;
 var coincon = false;
  
 function scaninput(e) {
@@ -100,10 +101,20 @@ var update = function () {
         player_x = 800;
         screenx--;
     }
+    if (player_y > 600){
+        player_y = 0;
+        screeny++;
+    }
+    if (player_y < 0){
+        player_y = 600;
+        screeny--;
+    }
 };
 
 function collrect(x, y, w, h){
-    
+    context.clearRect(x, y, x+w, y+h);
+    context.fillStyle = "#ffffff";
+    context.fillRect(x, y, x+w, y+h);
     if(player_x > x - player_w && player_x < (x+w)){
         if (player_y > y) {
         player_y = y;
