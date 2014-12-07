@@ -2,16 +2,17 @@ var dt = 1 / 100;
 var fps = 1000;
  
 var player_image = new Image();
-player_image.src = "Test Sprite.png";
+player_image.src = "spritef.png";
 player_points = 0;
 player_xvel = 0;
 player_yvel = 0;
-player_x = 0;
-player_y = 540;
+player_x = 350;
+player_y = 500;
 player_w = 37;
 player_h = 92;
 var moveright = false;
 var moveleft = false;
+//var movedown = false;
 var jump = false;
 var ground = true;
 var screen = 0;
@@ -27,14 +28,22 @@ function scaninput(e) {
     case 38: //Up key
 //        console.log("you pressed up");
         jump = true;
+        player_image.src = "spriteb.png";
         break;
     case 39: //Right key
 //        console.log("you pressed right");
         moveright = true;
+        player_image.src = "spriter.png";
         break;
     case 37: //Left Key
 //        console.log("you pressed left");
         moveleft = true;
+        player_image.src = "spritel.png";
+        break;
+    case 40: //Down Key
+//        console.log("you pressed down");
+        movedown = true;
+        player_image.src = "spritef.png";
         break;
     }
 }
