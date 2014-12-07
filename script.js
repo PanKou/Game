@@ -2,7 +2,7 @@ var dt = 1 / 100;
 var fps = 1000;
  
 var player_image = new Image();
-player_image.src = "spritef.png";
+player_image.src = "spriteb.png";
 player_points = 0;
 player_xvel = 0;
 player_yvel = 0;
